@@ -64,6 +64,55 @@ CREATE TABLE `Prescription` (
   `Quantity` int NOT NULL
 );
 
+CREATE TABLE Treatment(
+	Treatment_Id varchar(255) Primary Key,
+	CC text NOT NULL,
+	Date_treatment date NOT NULL,
+	Cure_Detail text NOT NULL,
+	Severity varchar(255) NOT NULL,
+	"Type" varchar(3) NOT NULL,
+	"Temp" varchar(10) NOT NULL,
+	HN varchar(255) NOT NULL,
+	Employee_Id varchar(255) NOT NULL
+);
+
+CREATE TABLE IPD(
+	AN varchar(255) Primary Key,
+	Ward_Id varchar(255) NOT NULL,
+	Date_Check_In date NOT NULL,
+	Date_Check_Out date NOT NULL,
+	Treatment_Id varchar(255) NOT NULL
+);
+
+CREATE TABLE Appointment(
+	Appointment_Id varchar(255) Primary Key,
+	Date_Appointment date NOT NULL,
+	Appointment_Detail text NOT NULL,
+	Status text NOT NULL,
+	Treatment_Id varchar(255) NOT NULL
+);
+
+CREATE TABLE Stayed_By(
+	Room_Id int,
+	Date_Check_In date NOT NULL,
+	Date_Check_Out date NOT NULL,
+	HN varchar(255) NOT NULL
+);
+
+CREATE TABLE Hotel_Room(
+	Room_Id int Primary Key,
+	Room_Price int NOT NULL,
+	Employee_Id varchar(255) NOT NULL
+);
+
+CREATE TABLE Grooming(
+	Grooming_Id varchar(255) Primary Key,
+	Groom_Date date NOT NULL,
+	Groom_Detail text NOT NULL,
+	Grooming_Price int NOT NULL,
+	Employee_Id varchar(255) NOT NULL
+);
+
 
 ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
@@ -72,3 +121,16 @@ ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`H
 ALTER TABLE `Employee` ADD FOREIGN KEY (`Position_Id`) REFERENCES `Position` (`Position_Id`);
 
 ALTER TABLE `Medicine_Info` ADD FOREIGN KEY (`Medicine_name`) REFERENCES `Medicine` (`Medicine_Name`);
+
+ALTER TABLE Treatment ADD CONSTRAINT check_type CHECK(("Temp" IN ('OPD', 'IPD')));
+
+ALTER TABLE IPD ADD FOREIGN KEY(Treatment_Id) REFERENCES Treatment(Treatment_Id);
+
+ALTER TABLE Appointment ADD FOREIGN KEY(Treatment_Id) REFERENCES Treatment(Treatment_Id);
+
+ALTER TABLE Stayed_By ADD PRIMARY KEY(Room_Id, HN);
+
+ALTER TABLE Hotel_Room ADD FOREIGN KEY(Employee_Id) REFERENCES Employee(Employee_Id);
+
+ALTER TABLE Grooming ADD FOREIGN KEY(Employee_Id) REFERENCES Employee(Employee_Id);
+
