@@ -16,7 +16,6 @@ CREATE TABLE `Pet` (
   `Sex` enum(M,FM) NOT NULL,
   `Allergy` text NOT NULL,
   `Congenital_Disease` text NOT NULL,
-  `Owner` varchar(255) NOT NULL
 );
 
 CREATE TABLE `Has_Allergy` (
@@ -65,7 +64,6 @@ CREATE TABLE `Prescription` (
   `Quantity` int NOT NULL
 );
 
-ALTER TABLE `Pet` ADD FOREIGN KEY (`Owner`) REFERENCES `Customer` (`Customer_Id`);
 
 ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
