@@ -92,17 +92,14 @@ CREATE TABLE Appointment(
 	Treatment_Id varchar(255) NOT NULL
 );
 
-CREATE TABLE Stayed_By(
-	Room_Id int,
+CREATE TABLE Staying_Session(
+	Stay_Id varchar(255) Primary key,
+	Room_Id int NOT NULL,
+	Room_Price float NOT NULL,
 	Date_Check_In date NOT NULL,
 	Date_Check_Out date NOT NULL,
-	HN varchar(255) NOT NULL
-);
-
-CREATE TABLE Hotel_Room(
-	Room_Id int Primary Key,
-	Room_Price int NOT NULL,
-	Employee_Id varchar(255) NOT NULL
+	HN varchar(255) NOT NULL,
+	Employee_Id varchar(255) NOT NULL	
 );
 
 CREATE TABLE Grooming(
@@ -110,9 +107,17 @@ CREATE TABLE Grooming(
 	Groom_Date date NOT NULL,
 	Groom_Detail text NOT NULL,
 	Grooming_Price int NOT NULL,
-	Employee_Id varchar(255) NOT NULL
+	Employee_Id varchar(255) NOT NULL,
+	HN varchar(255) NOT NULL
 );
 
+CREATE TABLE Allergy(
+	Allergic_Thing varchar(255) Primary key
+);
+
+CREATE TABLE Congenital_Disease(
+	Congenital_disease_thing varchar(255) Primary key
+);
 
 ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
@@ -128,9 +133,10 @@ ALTER TABLE IPD ADD FOREIGN KEY(Treatment_Id) REFERENCES Treatment(Treatment_Id)
 
 ALTER TABLE Appointment ADD FOREIGN KEY(Treatment_Id) REFERENCES Treatment(Treatment_Id);
 
-ALTER TABLE Stayed_By ADD PRIMARY KEY(Room_Id, HN);
-
-ALTER TABLE Hotel_Room ADD FOREIGN KEY(Employee_Id) REFERENCES Employee(Employee_Id);
-
 ALTER TABLE Grooming ADD FOREIGN KEY(Employee_Id) REFERENCES Employee(Employee_Id);
 
+ALTER TABLE Grooming ADD FOREIGN KEY(HN) REFERENCES Pet(HN);
+
+ALTER TABLE Staying_Session ADD FOREIGN KEY(HN) REFERENCES Pet(HN);
+
+ALTER TABLE Staying_Session ADD FOREIGN KEY(Employee_Id) REFERENCES Employee(Employee_Id);
