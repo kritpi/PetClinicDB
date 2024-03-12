@@ -14,19 +14,17 @@ CREATE TABLE `Pet` (
   `Pet_Name` text NOT NULL,
   `Birth_Date` DATE NOT NULL, 
   `Sex` ENUM('M','F') NOT NULL,  
-  `Allergy` text NOT NULL,
-  `Congenital_Disease` text NOT NULL
+  `Weight` float NOT NULL
 );
 
-
 CREATE TABLE `Has_Allergy` (
-  `HN` varchar(255) PRIMARY KEY NOT NULL,
-  `Allergic_Thing` text NOT NULL
+  `HN` varchar(255) NOT NULL,
+  `Allergic_Thing` varchar(255) NOT NULL
 );
 
 CREATE TABLE `Has_Congenital_Disease` (
-  `HN` varchar(255) PRIMARY KEY NOT NULL,
-  `Congenital_Disease_Thing` text NOT NULL
+  `HN` varchar(255) NOT NULL,
+  `Congenital_Disease_Thing` varchar(255) NOT NULL
 );
 
 CREATE TABLE `Employee` (
@@ -48,7 +46,7 @@ CREATE TABLE `Position` (
 
 CREATE TABLE `Medicine` (
   `Medicine_Id` varchar(255) PRIMARY KEY,
-  `Medicine_Name` text NOT NULL,
+  `Medicine_Name` varchar(255) NOT NULL,
   `Price` float NOT NULL,
   `Usage` text NOT NULL,
   `Dose` float NOT NULL,
@@ -56,7 +54,7 @@ CREATE TABLE `Medicine` (
 );
 
 CREATE TABLE `Medicine_Info` (
-  `Medicine_name` text PRIMARY KEY NOT NULL,
+  `Medicine_Name` varchar(255) PRIMARY KEY,
   `Medicine_Detail` text NOT NULL
 );
 
@@ -148,8 +146,8 @@ CREATE TABLE `Own` (
 );
 
 CREATE TABLE `Dispensing` (
-  `Prescription_Id` varchar(255) PRIMARY KEY,
-  `Medicine_Id` datetime NOT NULL,
+  `Prescription_Id` varchar(255) NOT NULL,
+  `Medicine_Id` varchar(255) NOT NULL,
   `Treatment_Id` varchar(255) NOT NULL
 );
 
@@ -157,11 +155,13 @@ ALTER TABLE `Own` ADD FOREIGN KEY (`Customer_id`) REFERENCES `Customer` (`Custom
 
 ALTER TABLE `Own` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
-ALTER TABLE `Treatment` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Dispensing` (`Treatment_Id`);
+ALTER TABLE `Dispensing` ADD PRIMARY KEY (`Prescription_Id`,`Medicine_Id`);
 
-ALTER TABLE `Medicine` ADD FOREIGN KEY (`Medicine_Id`) REFERENCES `Dispensing` (`Medicine_Id`);
+ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
 
-ALTER TABLE `Prescription` ADD FOREIGN KEY (`Prescription_Id`) REFERENCES `Dispensing` (`Prescription_Id`);
+ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Medicine_Id`) REFERENCES `Medicine` (`Medicine_Id`);
+
+ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Prescription_Id`) REFERENCES `Prescription` (`Prescription_Id`);
 
 ALTER TABLE `Receipt_Treatment` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
 
@@ -171,13 +171,21 @@ ALTER TABLE `Grooming` ADD FOREIGN KEY (`Receipt_Grooming_id`) REFERENCES `Recei
 
 ALTER TABLE `Treatment` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
+ALTER TABLE `Has_Allergy` ADD PRIMARY KEY (`HN`, `Allergic_Thing`);
+
 ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
+
+ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`Allergic_Thing`) REFERENCES `Allergy` (`Allergic_Thing`);
+
+ALTER TABLE `Has_Congenital_Disease` ADD PRIMARY KEY (`HN`, `Congenital_Disease_Thing`);
 
 ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
+ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`Congenital_Disease_Thing`) REFERENCES `Congenital_Disease` (`Congenital_Disease_Thing`);
+
 ALTER TABLE `Employee` ADD FOREIGN KEY (`Position_Id`) REFERENCES `Position` (`Position_Id`);
 
-ALTER TABLE `Medicine_Info` ADD FOREIGN KEY (`Medicine_name`) REFERENCES `Medicine` (`Medicine_Name`);
+ALTER TABLE `Medicine` ADD FOREIGN KEY (`Medicine_Name`) REFERENCES `Medicine_Info` (`Medicine_Name`);
 
 ALTER TABLE `IPD` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
 
@@ -190,3 +198,5 @@ ALTER TABLE `Grooming` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
 ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+
+ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`Receipt_stay_id`) REFERENCES `Receipt_Stay` (`Receipt_stay_id`);
