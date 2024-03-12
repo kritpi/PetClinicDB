@@ -155,6 +155,8 @@ ALTER TABLE `Own` ADD FOREIGN KEY (`Customer_id`) REFERENCES `Customer` (`Custom
 
 ALTER TABLE `Own` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
 
+ALTER TABLE `Treatment` ADD CONSTRAINT check_type CHECK((`Temp` IN ('OPD', 'IPD')));
+
 ALTER TABLE `Dispensing` ADD PRIMARY KEY (`Prescription_Id`,`Medicine_Id`);
 
 ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
