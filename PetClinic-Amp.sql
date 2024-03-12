@@ -4,7 +4,7 @@ CREATE TABLE `Customer` (
   `Customer_Fname` text NOT NULL,
   `Customer_Sname` text NOT NULL,
   `Tel_number_Owner` varchar(10) NOT NULL,
-  `Address` text NOT NULL
+  `Customer_address` text NOT NULL
 );
 
 CREATE TABLE `Pet` (
@@ -12,7 +12,7 @@ CREATE TABLE `Pet` (
   `Category` text NOT NULL,
   `Breed` text NOT NULL,
   `Pet_Name` text NOT NULL,
-  `Birth_Date` DATE NOT NULL, 
+  `Birthdate` DATE NOT NULL, 
   `Sex` ENUM('M','F') NOT NULL,  
   `Weight` float NOT NULL
 );
@@ -34,20 +34,27 @@ CREATE TABLE `Employee` (
   `Id_card_Employee` varchar(255) NOT NULL,
   `Salary` float NOT NULL,
   `Tel_Number_Employee` varchar(10) NOT NULL,
-  `Address` text NOT NULL,
-  `Position_Id` varchar(255) NOT NULL
+  `Employee_Address` text NOT NULL,
+  `Position` text NOT NULL
 );
 
-CREATE TABLE `Position` (
-  `Position_Id` varchar(255) PRIMARY KEY NOT NULL,
-  `Position_Name` text NOT NULL,
-  `DF_Value` float
+CREATE TABLE `Doctor` (
+  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL,
+  `DF` float NOT NULL
+);
+
+CREATE TABLE `Groomer` (
+  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL
+);
+
+CREATE TABLE `Staff` (
+  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE `Medicine` (
   `Medicine_Id` varchar(255) PRIMARY KEY,
   `Medicine_Name` varchar(255) NOT NULL,
-  `Price` float NOT NULL,
+  `Medicine_Price` float NOT NULL,
   `Usage` text NOT NULL,
   `Dose` float NOT NULL,
   `Expiration_Date` date NOT NULL
@@ -60,6 +67,7 @@ CREATE TABLE `Medicine_Info` (
 
 CREATE TABLE `Prescription` (
   `Prescription_Id` varchar(255) PRIMARY KEY NOT NULL,
+  `Prescription_Date` date NOT NULL,  
   `Quantity` int NOT NULL
 );
 
@@ -136,7 +144,7 @@ CREATE TABLE `Receipt_Stay` (
 CREATE TABLE `Receipt_Treatment` (
   `Receipt_Treatment_id` varchar(255) PRIMARY KEY,
   `Total_Treatment_charges` float NOT NULL,
-  `Payment_Treatmen_Date` datetime NOT NULL,
+  `Payment_Treatment_Date` datetime NOT NULL,
   `Treatment_Id` varchar(255) NOT NULL
 );
 
@@ -185,7 +193,11 @@ ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`H
 
 ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`Congenital_Disease_Thing`) REFERENCES `Congenital_Disease` (`Congenital_Disease_Thing`);
 
-ALTER TABLE `Employee` ADD FOREIGN KEY (`Position_Id`) REFERENCES `Position` (`Position_Id`);
+ALTER TABLE `Doctor` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+
+ALTER TABLE `Groomer` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+
+ALTER TABLE `Staff` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
 
 ALTER TABLE `Medicine` ADD FOREIGN KEY (`Medicine_Name`) REFERENCES `Medicine_Info` (`Medicine_Name`);
 
