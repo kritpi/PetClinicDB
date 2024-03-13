@@ -1,216 +1,209 @@
-CREATE TABLE `Customer` (
-  `Customer_Id` varchar(255) PRIMARY KEY NOT NULL,
-  `Id_Customer` varchar(13) NOT NULL,
-  `Customer_Fname` text NOT NULL,
-  `Customer_Sname` text NOT NULL,
-  `Tel_number_Owner` varchar(10) NOT NULL,
+CREATE TABLE `CUSTOMER` (
+  `Customer_id` varchar(255) PRIMARY KEY NOT NULL,
+  `Id_customer` varchar(13) NOT NULL,
+  `Customer_fname` text NOT NULL,
+  `Customer_sname` text NOT NULL,
+  `Tel_number_owner` varchar(10) NOT NULL,
   `Customer_address` text NOT NULL
 );
 
-CREATE TABLE `Pet` (
+CREATE TABLE `PET` (
   `HN` varchar(255) PRIMARY KEY NOT NULL,
   `Category` text NOT NULL,
   `Breed` text NOT NULL,
-  `Pet_Name` text NOT NULL,
-  `Birthdate` DATE NOT NULL, 
-  `Sex` ENUM('M','F') NOT NULL,  
+  `Pet_name` text NOT NULL,
+  `Birthdate` date NOT NULL,
+  `Sex` ENUM ('M', 'F') NOT NULL,
   `Weight` float NOT NULL
 );
 
-CREATE TABLE `Has_Allergy` (
+CREATE TABLE `HAS_ALLERGY` (
   `HN` varchar(255) NOT NULL,
-  `Allergic_Thing` varchar(255) NOT NULL
+  `Allergic_thing` varchar(255) NOT NULL,
+  PRIMARY KEY (`HN`, `Allergic_thing`)
 );
 
-CREATE TABLE `Has_Congenital_Disease` (
+CREATE TABLE `HAS_CONGENITAL_DISEASE` (
   `HN` varchar(255) NOT NULL,
-  `Congenital_Disease_Thing` varchar(255) NOT NULL
+  `Congenital_disease_thing` varchar(255) NOT NULL,
+  PRIMARY KEY (`HN`, `Congenital_disease_thing`)
 );
 
-CREATE TABLE `Employee` (
-  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL,
-  `Employee_Fname` text NOT NULL,
-  `Employee_Sname` text NOT NULL,
-  `Id_card_Employee` varchar(255) NOT NULL,
+CREATE TABLE `EMPLOYEE` (
+  `Employee_id` varchar(255) PRIMARY KEY NOT NULL,
+  `Employee_fname` text NOT NULL,
+  `Employee_sname` text NOT NULL,
+  `Id_card_employee` varchar(255) NOT NULL,
   `Salary` float NOT NULL,
-  `Tel_Number_Employee` varchar(10) NOT NULL,
-  `Employee_Address` text NOT NULL,
+  `Tel_number_employee` varchar(10) NOT NULL,
+  `Employee_address` text NOT NULL,
   `Position` text NOT NULL
 );
 
-CREATE TABLE `Doctor` (
-  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL,
+CREATE TABLE `DOCTOR` (
+  `Employee_id` varchar(255) PRIMARY KEY NOT NULL,
   `DF` float NOT NULL
 );
 
-CREATE TABLE `Groomer` (
-  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL
+CREATE TABLE `GROOMER` (
+  `Employee_id` varchar(255) PRIMARY KEY NOT NULL
 );
 
-CREATE TABLE `Staff` (
-  `Employee_Id` varchar(255) PRIMARY KEY NOT NULL
+CREATE TABLE `STAFF` (
+  `Employee_id` varchar(255) PRIMARY KEY NOT NULL
 );
 
-CREATE TABLE `Medicine` (
-  `Medicine_Id` varchar(255) PRIMARY KEY,
-  `Medicine_Name` varchar(255) NOT NULL,
-  `Medicine_Price` float NOT NULL,
+CREATE TABLE `MEDICINE` (
+  `Medicine_id` varchar(255) PRIMARY KEY,
+  `Medicine_name` varchar(255) NOT NULL,
+  `Medicine_price` float NOT NULL,
   `Usage` text NOT NULL,
   `Dose` float NOT NULL,
-  `Expiration_Date` date NOT NULL
+  `Expiration_date` date NOT NULL
 );
 
-CREATE TABLE `Medicine_Info` (
-  `Medicine_Name` varchar(255) PRIMARY KEY,
-  `Medicine_Detail` text NOT NULL
+CREATE TABLE `MEDICINE_INFO` (
+  `Medicine_name` varchar(255) PRIMARY KEY,
+  `Medicine_detail` text NOT NULL
 );
 
-CREATE TABLE `Prescription` (
-  `Prescription_Id` varchar(255) PRIMARY KEY NOT NULL,
-  `Prescription_Date` date NOT NULL,  
+CREATE TABLE `PRESCRIPTION` (
+  `Prescription_id` varchar(255) PRIMARY KEY NOT NULL,
+  `Prescription_date` date NOT NULL,
   `Quantity` int NOT NULL
 );
 
-CREATE TABLE `Treatment` (
-  `Treatment_Id` varchar(255) PRIMARY KEY,
+CREATE TABLE `TREATMENT` (
+  `Treatment_id` varchar(255) PRIMARY KEY,
   `CC` text NOT NULL,
   `Date_treatment` date NOT NULL,
-  `Cure_Detail` text NOT NULL,
+  `Cure_detail` text NOT NULL,
   `Severity` varchar(255) NOT NULL,
   `Type` varchar(3) NOT NULL,
   `Temp` varchar(10) NOT NULL,
   `HN` varchar(255) NOT NULL,
-  `Employee_Id` varchar(255) NOT NULL
+  `Employee_id` varchar(255) NOT NULL
 );
 
 CREATE TABLE `IPD` (
   `AN` varchar(255) PRIMARY KEY,
-  `Ward_Id` varchar(255) NOT NULL,
-  `Date_Check_In` date NOT NULL,
-  `Date_Check_Out` date NOT NULL,
-  `Treatment_Id` varchar(255) NOT NULL
+  `Ward_id` varchar(255) NOT NULL,
+  `Date_check_in_ipd` date NOT NULL,
+  `Date_check_out_ipd` date NOT NULL,
+  `Treatment_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Appointment` (
-  `Appointment_Id` varchar(255) PRIMARY KEY,
-  `Date_Appointment` date NOT NULL,
-  `Appointment_Detail` text NOT NULL,
+CREATE TABLE `APPOINTMENT` (
+  `Appointment_id` varchar(255) PRIMARY KEY,
+  `Date_appointment` date NOT NULL,
+  `Appointment_detail` text NOT NULL,
   `Status` text NOT NULL,
-  `Treatment_Id` varchar(255) NOT NULL
+  `Treatment_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Staying_Session` (
-  `Stay_Id` varchar(255) PRIMARY KEY,
-  `Room_Id` int NOT NULL,
-  `Room_Price` float NOT NULL,
-  `Date_Check_In` date NOT NULL,
-  `Date_Check_Out` date NOT NULL,
+CREATE TABLE `STAYING_SESSION` (
+  `Stay_id` varchar(255) PRIMARY KEY,
+  `Room_id` int NOT NULL,
+  `Room_price` float NOT NULL,
+  `Date_check_in_stay` date NOT NULL,
+  `Date_check_out_stay` date NOT NULL,
   `HN` varchar(255) NOT NULL,
-  `Employee_Id` varchar(255) NOT NULL,
+  `Employee_id` varchar(255) NOT NULL,
   `Receipt_stay_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Grooming` (
-  `Grooming_Id` varchar(255) PRIMARY KEY,
-  `Groom_Date` date NOT NULL,
-  `Groom_Detail` text NOT NULL,
-  `Grooming_Price` int NOT NULL,
-  `Employee_Id` varchar(255) NOT NULL,
+CREATE TABLE `GROOMING` (
+  `Grooming_id` varchar(255) PRIMARY KEY,
+  `Groom_date` date NOT NULL,
+  `Groom_detail` text NOT NULL,
+  `Grooming_price` int NOT NULL,
+  `Employee_id` varchar(255) NOT NULL,
   `HN` varchar(255) NOT NULL,
-  `Receipt_Grooming_id` varchar(255) NOT NULL
+  `Receipt_grooming_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Allergy` (
-  `Allergic_Thing` varchar(255) PRIMARY KEY
+CREATE TABLE `ALLERGY` (
+  `Allergic_thing` varchar(255) PRIMARY KEY
 );
 
-CREATE TABLE `Congenital_Disease` (
+CREATE TABLE `CONGENITAL_DISEASE` (
   `Congenital_disease_thing` varchar(255) PRIMARY KEY
 );
 
-CREATE TABLE `Receipt_Grooming` (
-  `Receipt_Grooming_id` varchar(255) PRIMARY KEY,
-  `Total_Grooming_charges` float NOT NULL,
-  `Payment_Grooming_Date` datetime NOT NULL,
-  `Grooming_Id` varchar(255) NOT NULL
+CREATE TABLE `RECEIPT_GROOMING` (
+  `Receipt_grooming_id` varchar(255) PRIMARY KEY,
+  `Total_grooming_charges` float NOT NULL,
+  `Payment_grooming_date` datetime NOT NULL,
+  `Grooming_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Receipt_Stay` (
+CREATE TABLE `RECEIPT_STAY` (
   `Receipt_stay_id` varchar(255) PRIMARY KEY,
-  `Total_Stay_charges` float NOT NULL,
-  `Payment_Stay_Date` datetime NOT NULL
+  `Total_stay_charges` float NOT NULL,
+  `Payment_stay_date` datetime NOT NULL
 );
 
-CREATE TABLE `Receipt_Treatment` (
-  `Receipt_Treatment_id` varchar(255) PRIMARY KEY,
-  `Total_Treatment_charges` float NOT NULL,
-  `Payment_Treatment_Date` datetime NOT NULL,
-  `Treatment_Id` varchar(255) NOT NULL
+CREATE TABLE `RECEIPT_TREATMENT` (
+  `Receipt_treatment_id` varchar(255) PRIMARY KEY,
+  `Total_treatment_charges` float NOT NULL,
+  `Payment_treatment_date` datetime NOT NULL,
+  `Treatment_id` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Own` (
+CREATE TABLE `OWN` (
   `Customer_id` varchar(255) NOT NULL,
   `HN` varchar(255) NOT NULL
 );
 
-CREATE TABLE `Dispensing` (
-  `Prescription_Id` varchar(255) NOT NULL,
-  `Medicine_Id` varchar(255) NOT NULL,
-  `Treatment_Id` varchar(255) NOT NULL
+CREATE TABLE `DISPENSING` (
+  `Prescription_id` varchar(255) NOT NULL,
+  `Medicine_id` varchar(255) NOT NULL,
+  `Treatment_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`Prescription_id`, `Medicine_id`)
 );
 
-ALTER TABLE `Own` ADD FOREIGN KEY (`Customer_id`) REFERENCES `Customer` (`Customer_Id`);
+ALTER TABLE `OWN` ADD FOREIGN KEY (`Customer_id`) REFERENCES `CUSTOMER` (`Customer_id`);
 
-ALTER TABLE `Own` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
+ALTER TABLE `OWN` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `Treatment` ADD CONSTRAINT check_type CHECK((`Temp` IN ('OPD', 'IPD')));
+ALTER TABLE `DISPENSING` ADD FOREIGN KEY (`Treatment_id`) REFERENCES `TREATMENT` (`Treatment_id`);
 
-ALTER TABLE `Dispensing` ADD PRIMARY KEY (`Prescription_Id`,`Medicine_Id`);
+ALTER TABLE `DISPENSING` ADD FOREIGN KEY (`Medicine_id`) REFERENCES `MEDICINE` (`Medicine_id`);
 
-ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
+ALTER TABLE `DISPENSING` ADD FOREIGN KEY (`Prescription_id`) REFERENCES `PRESCRIPTION` (`Prescription_id`);
 
-ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Medicine_Id`) REFERENCES `Medicine` (`Medicine_Id`);
+ALTER TABLE `RECEIPT_TREATMENT` ADD FOREIGN KEY (`Treatment_id`) REFERENCES `TREATMENT` (`Treatment_id`);
 
-ALTER TABLE `Dispensing` ADD FOREIGN KEY (`Prescription_Id`) REFERENCES `Prescription` (`Prescription_Id`);
+ALTER TABLE `GROOMING` ADD FOREIGN KEY (`Receipt_grooming_id`) REFERENCES `RECEIPT_GROOMING` (`Receipt_grooming_id`);
 
-ALTER TABLE `Receipt_Treatment` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
+ALTER TABLE `TREATMENT` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`Receipt_stay_id`) REFERENCES `Receipt_Stay` (`Receipt_stay_id`);
+ALTER TABLE `HAS_ALLERGY` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `Grooming` ADD FOREIGN KEY (`Receipt_Grooming_id`) REFERENCES `Receipt_Grooming` (`Receipt_Grooming_id`);
+ALTER TABLE `HAS_ALLERGY` ADD FOREIGN KEY (`Allergic_thing`) REFERENCES `ALLERGY` (`Allergic_thing`);
 
-ALTER TABLE `Treatment` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
+ALTER TABLE `HAS_CONGENITAL_DISEASE` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `Has_Allergy` ADD PRIMARY KEY (`HN`, `Allergic_Thing`);
+ALTER TABLE `HAS_CONGENITAL_DISEASE` ADD FOREIGN KEY (`Congenital_disease_thing`) REFERENCES `CONGENITAL_DISEASE` (`Congenital_disease_thing`);
 
-ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
+ALTER TABLE `DOCTOR` ADD FOREIGN KEY (`Employee_id`) REFERENCES `EMPLOYEE` (`Employee_id`);
 
-ALTER TABLE `Has_Allergy` ADD FOREIGN KEY (`Allergic_Thing`) REFERENCES `Allergy` (`Allergic_Thing`);
+ALTER TABLE `GROOMER` ADD FOREIGN KEY (`Employee_id`) REFERENCES `EMPLOYEE` (`Employee_id`);
 
-ALTER TABLE `Has_Congenital_Disease` ADD PRIMARY KEY (`HN`, `Congenital_Disease_Thing`);
+ALTER TABLE `STAFF` ADD FOREIGN KEY (`Employee_id`) REFERENCES `EMPLOYEE` (`Employee_id`);
 
-ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
+ALTER TABLE `MEDICINE` ADD FOREIGN KEY (`Medicine_name`) REFERENCES `MEDICINE_INFO` (`Medicine_name`);
 
-ALTER TABLE `Has_Congenital_Disease` ADD FOREIGN KEY (`Congenital_Disease_Thing`) REFERENCES `Congenital_Disease` (`Congenital_Disease_Thing`);
+ALTER TABLE `IPD` ADD FOREIGN KEY (`Treatment_id`) REFERENCES `TREATMENT` (`Treatment_id`);
 
-ALTER TABLE `Doctor` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+ALTER TABLE `APPOINTMENT` ADD FOREIGN KEY (`Treatment_id`) REFERENCES `TREATMENT` (`Treatment_id`);
 
-ALTER TABLE `Groomer` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+ALTER TABLE `GROOMING` ADD FOREIGN KEY (`Employee_id`) REFERENCES `EMPLOYEE` (`Employee_id`);
 
-ALTER TABLE `Staff` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
+ALTER TABLE `GROOMING` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `Medicine` ADD FOREIGN KEY (`Medicine_Name`) REFERENCES `Medicine_Info` (`Medicine_Name`);
+ALTER TABLE `STAYING_SESSION` ADD FOREIGN KEY (`HN`) REFERENCES `PET` (`HN`);
 
-ALTER TABLE `IPD` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
+ALTER TABLE `STAYING_SESSION` ADD FOREIGN KEY (`Employee_id`) REFERENCES `EMPLOYEE` (`Employee_id`);
 
-ALTER TABLE `Appointment` ADD FOREIGN KEY (`Treatment_Id`) REFERENCES `Treatment` (`Treatment_Id`);
-
-ALTER TABLE `Grooming` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
-
-ALTER TABLE `Grooming` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
-
-ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`HN`) REFERENCES `Pet` (`HN`);
-
-ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`Employee_Id`) REFERENCES `Employee` (`Employee_Id`);
-
-ALTER TABLE `Staying_Session` ADD FOREIGN KEY (`Receipt_stay_id`) REFERENCES `Receipt_Stay` (`Receipt_stay_id`);
+ALTER TABLE `STAYING_SESSION` ADD FOREIGN KEY (`Receipt_stay_id`) REFERENCES `RECEIPT_STAY` (`Receipt_stay_id`);
