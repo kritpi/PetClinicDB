@@ -162,7 +162,7 @@ CREATE TABLE `DISPENSING` (
   PRIMARY KEY (`Prescription_id`, `Medicine_id`)
 );
 
-ALTER TABLE `Treatment` ADD CONSTRAINT check_type CHECK((`Temp` IN ('OPD', 'IPD')));
+ALTER TABLE `Treatment` ADD CONSTRAINT check_type CHECK((`Type` IN ('OPD', 'IPD')));
 
 ALTER TABLE `OWN` ADD FOREIGN KEY (`Customer_id`) REFERENCES `CUSTOMER` (`Customer_id`);
 
