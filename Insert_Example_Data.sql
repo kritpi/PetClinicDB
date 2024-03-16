@@ -17,7 +17,7 @@ VALUES
 
 
 INSERT INTO PET (HN, Category, Breed, Pet_name, Birthdate, Sex, Weight)
-VALUES ('0166-025-2', 'สุนัข', 'French Bulldog', 'ด้วง', '2567-02-04', 'M', 15.0),
+VALUES ('0166-025-2', 'สุนัข', 'French Bulldog', 'ด้วง', '2567-02-04', 'M', '15.0 kg'),
        ('015-246', 'แมว', 'Khao Manee', 'ไข่ต้ม', '2565-11-12', 'M', '2.4 kg'),
        ('044-871', 'แมว', 'Munchkin', 'ชาบู', '2560-04-27', 'FM',' 5.3 kg'),
        ('01258-897', 'นก', 'Cockatiel', 'กิ่ง', '2566-07-06', 'FM', '0.2 kg'),
