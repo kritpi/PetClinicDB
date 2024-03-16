@@ -16,7 +16,7 @@ VALUES
 
 
 
-INSERT INTO PET (HN, Category, Breed, Pet_name, Birthdate, Sex, Weight)
+INSERT INTO PET (HN, Category, Breed, Pet_name, Birthdate, Sex, `Weight`)
 VALUES ('0166-025-2', 'สุนัข', 'French Bulldog', 'ด้วง', '2567-02-04', 'M', '15.0 kg'),
        ('015-246', 'แมว', 'Khao Manee', 'ไข่ต้ม', '2565-11-12', 'M', '2.4 kg'),
        ('044-871', 'แมว', 'Munchkin', 'ชาบู', '2560-04-27', 'FM',' 5.3 kg'),
@@ -127,7 +127,7 @@ VALUES
 ('03001-1102');
 
 
-INSERT INTO Treatment (Treatment_Id, CC, Date_treatment, Cure_Detail, Severity, Type, Temp, HN, Employee_Id)
+INSERT INTO Treatment (Treatment_Id, CC, Date_treatment, Cure_Detail, Severity, `Type`, Temp, HN, Employee_Id)
 VALUES 
 ('1497-1243-6', 'ผื่นขึ้นทั้งตัว','2567-01-31', 'ให้ยาชนิด เม็ด 3 ครั้งต่อวัน เป็นเวลา 10 วัน', 'ทั่วไป', 'OPD', '102.2 F', '0166-025-2', '01383-0277'),
 ('1675-149-2-4', 'อาการบาดเจ็บบริเวณดวงตา',' 2567-02-02', 'ให้ยาหยอดตา 2 ครั้งต่อวัน', 'ทั่วไป', 'OPD', '101.3 F', '015-246', '00122-0064'),
@@ -156,7 +156,7 @@ VALUES
 
 
 
-INSERT INTO Appointment (Appointment_Id, Date_Appointment, Appointment_Detail, Status, Treatment_Id)
+INSERT INTO Appointment (Appointment_Id, Date_Appointment, Appointment_Detail, `Status`, Treatment_Id)
 VALUES 
 ('1124-9810', '2567-02-03', 'นัดหมายฉัดวีคซันป้องกันโรค', 'เสร็จสิ้น', '1879-146-4-8'),
 ('1124-9820', '2567-02-11', 'นัดหมายฉีดวัคซีนป้องกันโรค', 'รอการดำเนินการ', '1497-1243-6'),
