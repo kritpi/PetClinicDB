@@ -133,7 +133,7 @@ CREATE TABLE `CONGENITAL_DISEASE` (
 CREATE TABLE `RECEIPT_GROOMING` (
   `Receipt_grooming_id` varchar(255) PRIMARY KEY,
   `Total_grooming_charges` float NOT NULL,
-  `Payment_grooming_date` datetime NOT NULL,
+  `Payment_grooming_date` datetime NOT NULL
 );
 
 CREATE TABLE `RECEIPT_STAY` (
