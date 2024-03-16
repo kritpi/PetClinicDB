@@ -1,9 +1,9 @@
 CREATE TABLE `CUSTOMER` (
   `Customer_id` varchar(255) PRIMARY KEY NOT NULL,
-  `Id_customer` varchar(13) NOT NULL,
+  `Id_card_customer` varchar(13) NOT NULL,
   `Customer_fname` text NOT NULL,
   `Customer_sname` text NOT NULL,
-  `Tel_number_owner` varchar(10) NOT NULL,
+  `Tel_number_owner` varchar(11) NOT NULL,
   `Customer_address` text NOT NULL
 );
 
@@ -13,8 +13,8 @@ CREATE TABLE `PET` (
   `Breed` text NOT NULL,
   `Pet_name` text NOT NULL,
   `Birthdate` date NOT NULL,
-  `Sex` ENUM ('M', 'F') NOT NULL,
-  `Weight` float NOT NULL
+  `Sex` ENUM ('M', 'FM') NOT NULL,
+  `Weight` varchar(9) NOT NULL
 );
 
 CREATE TABLE `HAS_ALLERGY` (
@@ -33,11 +33,11 @@ CREATE TABLE `EMPLOYEE` (
   `Employee_id` varchar(255) PRIMARY KEY NOT NULL,
   `Employee_fname` text NOT NULL,
   `Employee_sname` text NOT NULL,
-  `Id_card_employee` varchar(255) NOT NULL,
+  `Id_card_employee` varchar(13) NOT NULL,
   `Salary` float NOT NULL,
-  `Tel_number_employee` varchar(10) NOT NULL,
+  `Tel_number_employee` varchar(11) NOT NULL,
   `Employee_address` text NOT NULL,
-  `Position` text NOT NULL
+  `Position` ENUM('Staff', 'Doctor', 'Groomer') NOT NULL
 );
 
 CREATE TABLE `DOCTOR` (
@@ -58,7 +58,7 @@ CREATE TABLE `MEDICINE` (
   `Medicine_name` varchar(255) NOT NULL,
   `Medicine_price` float NOT NULL,
   `Usage` text NOT NULL,
-  `Dose` float NOT NULL,
+  `Dose` varchar(10) NOT NULL,
   `Expiration_date` date NOT NULL
 );
 
@@ -70,7 +70,7 @@ CREATE TABLE `MEDICINE_INFO` (
 CREATE TABLE `PRESCRIPTION` (
   `Prescription_id` varchar(255) PRIMARY KEY NOT NULL,
   `Prescription_date` date NOT NULL,
-  `Quantity` int NOT NULL
+  `Quantity` varchar(10) NOT NULL
 );
 
 CREATE TABLE `TREATMENT` (
@@ -79,7 +79,7 @@ CREATE TABLE `TREATMENT` (
   `Date_treatment` date NOT NULL,
   `Cure_detail` text NOT NULL,
   `Severity` varchar(255) NOT NULL,
-  `Type` varchar(3) NOT NULL,
+  `Type` ENUM ('OPD', 'IPD') NOT NULL,
   `Temp` varchar(10) NOT NULL,
   `HN` varchar(255) NOT NULL,
   `Employee_id` varchar(255) NOT NULL
@@ -116,7 +116,7 @@ CREATE TABLE `GROOMING` (
   `Grooming_id` varchar(255) PRIMARY KEY,
   `Groom_date` date NOT NULL,
   `Groom_detail` text NOT NULL,
-  `Grooming_price` int NOT NULL,
+  `Grooming_price` float NOT NULL,
   `Employee_id` varchar(255) NOT NULL,
   `HN` varchar(255) NOT NULL,
   `Receipt_grooming_id` varchar(255) NOT NULL
@@ -161,8 +161,6 @@ CREATE TABLE `DISPENSING` (
   `Treatment_id` varchar(255) NOT NULL,
   PRIMARY KEY (`Prescription_id`, `Medicine_id`)
 );
-
-ALTER TABLE `Treatment` ADD CONSTRAINT check_type CHECK((`Type` IN ('OPD', 'IPD')));
 
 ALTER TABLE `OWN` ADD FOREIGN KEY (`Customer_id`) REFERENCES `CUSTOMER` (`Customer_id`);
 
